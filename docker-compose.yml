@@ -1,0 +1,24 @@
+services:
+  point-virgule:
+    build: ../point-virgule
+    container_name: point-virgule
+    env_file:
+      - ../point-virgule/.env
+    ports:
+      - "80:80"
+    volumes:
+      - ../point-virgule/recordings:/app/recordings
+    networks:
+      - point-virgule
+
+  virgule:
+    build: .
+    container_name: virgule
+    ports:
+      - "5001:5001"
+    networks:
+      - point-virgule
+
+networks:
+  point-virgule:
+    driver: bridge
